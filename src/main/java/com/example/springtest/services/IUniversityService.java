@@ -10,6 +10,7 @@ public interface IUniversityService {
     void deleteUniversity(Long id);
     University findById(Long id);
     List<University> findAll();
+
     University affecterFoyerAUniversite(Long idFoyer, String nomUniversite);
 
 

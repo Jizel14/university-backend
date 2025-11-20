@@ -40,4 +40,12 @@ public class ReservationController {
     public List<Reservation> findAllReservations() {
         return reservationService.findAll();
     }
+    @PostMapping("/ajouterEtAssigner/{numChambre}/{cin}")
+    public Reservation ajouterReservationEtAssignerAChambreEtAEtudiant(
+            @RequestBody Reservation reservation,
+            @PathVariable Long numChambre,
+            @PathVariable Long cin) {
+        return reservationService.ajouterReservationEtAssignerAChambreEtAEtudiant(
+                reservation, numChambre, cin);
+    }
 }

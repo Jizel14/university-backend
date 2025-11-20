@@ -56,7 +56,7 @@ public class IUniversityServiceImp implements IUniversityService {
 
         // If both exist, assign foyer to university
         if (university != null && foyer != null) {
-            university.setFoyer2(foyer);  // Note: your entity uses 'foyer2'
+            university.setFoyer2(foyer);  //
             return universityRepo.save(university);
         }
 

@@ -40,4 +40,10 @@ public class FoyerController {
     public List<Foyer> findAllFoyers() {
         return foyerService.findAll();
     }
+    @PutMapping("/affecterBloc/{idBloc}/{idFoyer}")
+    public Foyer affecterBlocAFoyer(
+            @PathVariable Long idBloc,
+            @PathVariable Long idFoyer) {
+        return foyerService.affecterBlocAFoyer(idBloc, idFoyer);
+    }
 }

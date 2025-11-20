@@ -40,4 +40,10 @@ public class BlocController {
     public List<Bloc> findAllBlocs() {
         return blocService.findAll();
     }
+    @PutMapping("/affecterChambres/{nomBloc}")
+    public Bloc affecterChambresABloc(
+            @RequestBody List<Long> numChambre,
+            @PathVariable String nomBloc) {
+        return blocService.affecterChambresABloc(numChambre, nomBloc);
+    }
 }

@@ -40,4 +40,11 @@ public class UniversityController {
     public List<University> findAllUniversities() {
         return universityService.findAll();
     }
+
+    @PutMapping("/affecterFoyer/{idFoyer}/{nomUniversity}")
+    public University affecterFoyerAUniversite(
+            @PathVariable Long idFoyer,
+            @PathVariable String nomUniversity) {
+        return universityService.affecterFoyerAUniversite(idFoyer, nomUniversity);
+    }
 }
