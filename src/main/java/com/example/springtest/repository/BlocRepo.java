@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface BlocRepo extends JpaRepository<Bloc, Long> {
 
+    Bloc findByNomBloc(String nomBloc);
+
+
 }

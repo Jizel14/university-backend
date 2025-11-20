@@ -15,5 +15,7 @@ public interface IReservationService {
     Reservation findById(String id);
 
     List<Reservation> findAll();
+    Reservation ajouterReservationEtAssignerAChambreEtAEtudiant(Reservation res, Long numChambre, Long cin);
+
 
 }

@@ -24,6 +24,9 @@ public interface ChambreRepo extends JpaRepository<Chambre,Long> {
             nativeQuery = true)
     List<Chambre> findByBlocNameChambreNative( String nomBloc);
 
+    Chambre findByNumeroChambre(Long numeroChambre);
+
+
 }
 
 //keywords  :  List<chambre> findByBlocChambre_NomBloc(String nomBloc); bidrectionnells

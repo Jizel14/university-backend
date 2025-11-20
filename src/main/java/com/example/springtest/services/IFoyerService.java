@@ -12,5 +12,7 @@ public interface IFoyerService {
     void deleteFoyer(Long id);
     Foyer  findById(Long id);
     List<Foyer> findAll();
+    Foyer affecterBlocAFoyer(Long idBloc, Long idFoyer);
+
 
 }

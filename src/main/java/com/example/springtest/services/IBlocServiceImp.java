@@ -12,8 +12,11 @@ import java.util.List;
 public class IBlocServiceImp implements IBlocService {
 
     private final BlocRepo blocRepo;
-    public IBlocServiceImp(BlocRepo blocRepo) {
+    private final ChambreRepo chambreRepo;  // Add this
+
+    public IBlocServiceImp(BlocRepo blocRepo, ChambreRepo chambreRepo) {
         this.blocRepo = blocRepo;
+        this.chambreRepo = chambreRepo;
     }
 
 
@@ -37,4 +40,25 @@ public class IBlocServiceImp implements IBlocService {
     public List<Bloc> findAll(){
         return blocRepo.findAll();
     };
+    @Override
+    public Bloc affecterChambresABloc(List<Long> numChambre, String nomBloc) {
+        // Find the Bloc by its name
+        Bloc bloc = blocRepo.findByNomBloc(nomBloc);
+
+        if (bloc != null) {
+            // Loop through each chambre number
+            for (Long numCh : numChambre) {
+                // Find chambre by its numero
+                Chambre chambre = chambreRepo.findByNumeroChambre(numCh);
+
+                // If chambre exists, assign it to the bloc
+                if (chambre != null) {
+                    chambre.setBloc(bloc);
+                    chambreRepo.save(chambre);
+                }
+            }
+        }
+
+        return bloc;
+    }
 }

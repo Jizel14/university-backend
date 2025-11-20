@@ -12,4 +12,5 @@ public interface IBlocService {
     Bloc findByID(Long id);
     List<Bloc> findAll();
 
+    Bloc affecterChambresABloc(List<Long> numChambre, String nomBloc);
 }
