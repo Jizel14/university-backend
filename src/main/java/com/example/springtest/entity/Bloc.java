@@ -2,6 +2,7 @@ package com.example.springtest.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -23,6 +24,7 @@ public class Bloc {
     Long capaciteBloc;
 
     @ManyToOne
+    @JsonIgnore
     Foyer foyer;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bloc")
