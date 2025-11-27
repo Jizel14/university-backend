@@ -9,6 +9,10 @@ import com.example.springtest.repository.BlocRepo;
 import com.example.springtest.repository.FoyerRepo;
 import com.example.springtest.repository.UniversityRepo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
+
 
 import java.util.List;
 
@@ -64,32 +68,28 @@ public class IFoyerServiceImp implements IFoyerService {
     }
 
     @Override
+    @Transactional
     public Foyer ajouterFoyerEtAffecterAUniversite(Foyer foyer, long idUniversite) {
-        // 1) Récupère l'université
-        University university = universityRepo.findById(idUniversite).orElse(null);
-        if (university == null) {
-            return null; // ou lancer une exception / ResponseStatusException(404)
-        }
+        // 1) Récupérer l'université ou renvoyer 404
+        University university = universityRepo.findById(idUniversite)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "University not found"));
 
-        // 2) Si le foyer contient des blocs fournis, lier chaque bloc au foyer
-        //    (Important : s'assurer que chaque bloc a bien bloc.setFoyer(foyer))
+        // 2) Lier chaque Bloc au Foyer (Bloc est côté propriétaire)
         if (foyer.getBloc() != null) {
             for (Bloc b : foyer.getBloc()) {
                 b.setFoyer(foyer);
             }
         }
 
-        // 3) Sauvegarder le foyer (cascade = ALL devrait persister les blocs)
+        // 3) Persister le foyer (+ blocs grâce au cascade)
         Foyer savedFoyer = foyerRepo.save(foyer);
 
-        // 4) Affecter le foyer à l'université (University est le owning side)
+        // 4) Affecter le foyer à l'université (University est owning side)
         university.setFoyer2(savedFoyer);
         University savedUniversity = universityRepo.save(university);
 
-        // 5) Mettre à jour la référence back si tu veux cohérence en mémoire
+        // 5) Mettre à jour la référence en mémoire si nécessaire (optionnel)
         savedFoyer.setUniversity(savedUniversity);
-        savedFoyer = foyerRepo.save(savedFoyer);
-
         return savedFoyer;
     }
 
