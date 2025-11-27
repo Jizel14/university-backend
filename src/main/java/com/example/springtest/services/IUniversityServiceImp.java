@@ -56,10 +56,32 @@ public class IUniversityServiceImp implements IUniversityService {
 
         // If both exist, assign foyer to university
         if (university != null && foyer != null) {
-            university.setFoyer2(foyer);  //
+            university.setFoyer2(foyer);
             return universityRepo.save(university);
         }
 
         return null;
+    }
+
+    @Override
+    public University desaffecterFoyerAUniversite(long idUniversity) {
+        University university = universityRepo.findById(idUniversity).orElse(null);
+        if (university == null) {
+            return null; // university not found
+        }
+
+        Foyer foyer = university.getFoyer2();
+        if (foyer != null) {
+            // break relationship on owning side
+            university.setFoyer2(null);
+            universityRepo.save(university);
+
+            // also clear the back-reference to keep entities consistent
+            foyer.setUniversity(null);
+            foyerRepo.save(foyer);
+        }
+
+        // return the updated university (with foyer2 == null)
+        return universityRepo.findById(idUniversity).orElse(university);
     }
 }

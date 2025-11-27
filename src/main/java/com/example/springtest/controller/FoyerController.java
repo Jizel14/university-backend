@@ -46,4 +46,12 @@ public class FoyerController {
             @PathVariable Long idFoyer) {
         return foyerService.affecterBlocAFoyer(idBloc, idFoyer);
     }
+    // Nouveau endpoint : ajouter foyer + blocs et affecter à une université
+    @PostMapping("/addAndAffecter/{idUniversity}")
+    public Foyer ajouterFoyerEtAffecterAUniversite(
+            @RequestBody Foyer foyer,
+            @PathVariable long idUniversity) {
+        return foyerService.ajouterFoyerEtAffecterAUniversite(foyer, idUniversity);
+    }
+
 }

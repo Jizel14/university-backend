@@ -11,6 +11,6 @@ public interface IBlocService {
     void deleteByID(Long id);
     Bloc findByID(Long id);
     List<Bloc> findAll();
-
     Bloc affecterChambresABloc(List<Long> numChambre, String nomBloc);
+
 }

@@ -14,5 +14,7 @@ public interface IFoyerService {
     List<Foyer> findAll();
     Foyer affecterBlocAFoyer(Long idBloc, Long idFoyer);
 
+    // Nouveau : ajouter un foyer (avec ses blocs) et l'affecter à une université
+    Foyer ajouterFoyerEtAffecterAUniversite(Foyer foyer, long idUniversite);
 
 }

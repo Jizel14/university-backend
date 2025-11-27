@@ -12,6 +12,7 @@ public interface IUniversityService {
     List<University> findAll();
 
     University affecterFoyerAUniversite(Long idFoyer, String nomUniversite);
+    University desaffecterFoyerAUniversite(long idUniversity);
 
 
 }

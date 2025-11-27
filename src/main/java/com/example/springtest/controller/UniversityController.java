@@ -47,4 +47,8 @@ public class UniversityController {
             @PathVariable String nomUniversity) {
         return universityService.affecterFoyerAUniversite(idFoyer, nomUniversity);
     }
+    @PutMapping("/desaffecterFoyer/{idUniversity}")
+    public University desaffecterFoyerAUniversite(@PathVariable Long idUniversity) {
+        return universityService.desaffecterFoyerAUniversite(idUniversity);
+    }
 }
