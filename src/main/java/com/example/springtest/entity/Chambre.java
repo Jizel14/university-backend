@@ -27,7 +27,7 @@ public class Chambre {
     @JsonIgnore
     Bloc bloc;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chambre", orphanRemoval = false, fetch = FetchType.LAZY)
      Set<Reservation> reservations;
 
 }

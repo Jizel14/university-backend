@@ -48,4 +48,12 @@ public class ReservationController {
         return reservationService.ajouterReservationEtAssignerAChambreEtAEtudiant(
                 reservation, numChambre, cin);
     }
+
+    // New endpoint: POST /reservations/ajouter/{idBloc}/{cin}
+    @PostMapping("/ajouter/{idBloc}/{cin}")
+    public Reservation ajouterReservation(
+            @PathVariable("idBloc") long idBloc,
+            @PathVariable("cin") long cin) {
+        return reservationService.ajouterReservation(idBloc, cin);
+    }
 }

@@ -73,21 +73,17 @@ public class IFoyerServiceImp implements IFoyerService {
         // 1) Récupérer l'université ou renvoyer 404
         University university = universityRepo.findById(idUniversite)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "University not found"));
-
         // 2) Lier chaque Bloc au Foyer (Bloc est côté propriétaire)
         if (foyer.getBloc() != null) {
             for (Bloc b : foyer.getBloc()) {
                 b.setFoyer(foyer);
             }
         }
-
         // 3) Persister le foyer (+ blocs grâce au cascade)
         Foyer savedFoyer = foyerRepo.save(foyer);
-
         // 4) Affecter le foyer à l'université (University est owning side)
         university.setFoyer2(savedFoyer);
         University savedUniversity = universityRepo.save(university);
-
         // 5) Mettre à jour la référence en mémoire si nécessaire (optionnel)
         savedFoyer.setUniversity(savedUniversity);
         return savedFoyer;

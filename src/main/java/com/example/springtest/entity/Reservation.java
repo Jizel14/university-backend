@@ -1,9 +1,7 @@
 package com.example.springtest.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -27,5 +25,8 @@ public class Reservation {
 
     @ManyToMany(mappedBy = "reservations2", cascade = CascadeType.ALL)
      Set<Etudiant> etudiants;
+    @ManyToOne
+    @JsonIgnore
+    Chambre chambre;
 
 }
